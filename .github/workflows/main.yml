@@ -35,4 +35,4 @@ jobs:
           git diff --staged --quiet || git commit -m "Updated CSV"
           git push
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: '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'
