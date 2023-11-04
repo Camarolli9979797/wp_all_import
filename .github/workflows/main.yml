@@ -1,0 +1,35 @@
+name: CSV Transformation Workflow
+
+on:
+  schedule:
+    # Runs at every 10 minutes
+    - cron: '*/10 * * * *'
+
+jobs:
+  transform-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12' # Your Python version
+
+    - name: Install dependencies
+      run: |
+        pip install pandas requests
+
+    - name: Download and Transform CSV
+      run: python combo.py
+      env:
+        CSV_URL: ${{ secrets.CSV_URL }}
+
+    - name: Commit and push if changes
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git add -A
+        git commit -m "Updated CSV" || exit 0   # This will not fail if there's nothing to commit
+        git push
