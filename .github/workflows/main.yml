@@ -8,6 +8,7 @@ on:
 jobs:
   transform-and-commit:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -28,8 +29,11 @@ jobs:
 
     - name: Commit and push if changes
       run: |
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
+        git config --global user.email "mazzarolli.ai@gmail.com"
+        git config --global user.name "Camarolli9979797"
         git add -A
         git commit -m "Updated CSV" || exit 0   # This will not fail if there's nothing to commit
         git push
+      env:
+        CSV_URL: ${{ secrets.CSV_URL }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is used for pushing changes to your repository
