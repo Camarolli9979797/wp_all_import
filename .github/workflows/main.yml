@@ -10,29 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.12' # Ensure this matches the version your script is compatible with
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12' # Ensure this matches the version your script is compatible with
 
-    - name: Install dependencies
-      run: |
-        pip install pandas requests
+      - name: Install dependencies
+        run: |
+          pip install pandas requests
 
-    - name: Download and Transform CSV
-      run: python combo.py
-      env:
-        CSV_URL: ${{ secrets.CSV_URL }} # Ensure you've added your distributor's CSV URL as a secret
+      - name: Download and Transform CSV
+        run: python combo.py
+        env:
+          CSV_URL: ${{ secrets.CSV_URL }} # Ensure you've added your distributor's CSV URL as a secret
 
-    - name: Commit and push if changes
-      run: |
-        git config --global user.email "mazzarolli.ai@gmail.com"
-        git config --global user.name "Camarolli9979797"
-        git add -A
-        git commit -m "Updated CSV" || exit 0   # This won't fail if there's nothing to commit
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub automatically creates this secret to authenticate in your workflow
+      - name: Commit and push if changes
+        run: |
+          git config --global user.email "mazzarolli.ai@gmail.com"
+          git config --global user.name "Camarolli9979797"
+          git add -A
+          git commit -m "Updated CSV" || exit 0   # This won't fail if there's nothing to commit
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub automatically creates this secret to authenticate in your workflow
