@@ -2,7 +2,7 @@ name: CSV Transformation Workflow
 
 on:
   schedule:
-    # Runs at every 10 minutes
+    # Runs every 10 minutes
     - cron: '*/10 * * * *'
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12' # Your Python version
+        python-version: '3.12' # Ensure this matches the version your script is compatible with
 
     - name: Install dependencies
       run: |
@@ -25,15 +25,14 @@ jobs:
     - name: Download and Transform CSV
       run: python combo.py
       env:
-        CSV_URL: ${{ secrets.CSV_URL }}
+        CSV_URL: ${{ secrets.CSV_URL }} # Ensure you've added your distributor's CSV URL as a secret
 
     - name: Commit and push if changes
       run: |
         git config --global user.email "mazzarolli.ai@gmail.com"
         git config --global user.name "Camarolli9979797"
         git add -A
-        git commit -m "Updated CSV" || exit 0   # This will not fail if there's nothing to commit
+        git commit -m "Updated CSV" || exit 0   # This won't fail if there's nothing to commit
         git push
       env:
-        CSV_URL: ${{ secrets.CSV_URL }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is used for pushing changes to your repository
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub automatically creates this secret to authenticate in your workflow
