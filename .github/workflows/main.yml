@@ -28,11 +28,11 @@ jobs:
           CSV_URL: ${{ secrets.CSV_URL }} # Your distributor's CSV URL should be saved as a secret
 
       - name: Commit and push if changes
-        run: |
-          git config --global user.email "mazzarolli.ai@gmail.com"
-          git config --global user.name "Camarolli9979797"
-          git add -A
-          git diff --staged --quiet || git commit -m "Updated CSV"
-          git -c http.extraheader="AUTHORIZATION: bearer ${{ secrets.MY_GITHUB_TOKEN }}" push --set-upstream origin main
-        env:
-          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }} # PAT stored as a secret for GitHub Actions to push to the repository
+  run: |
+    git config --global user.email "mazzarolli.ai@gmail.com"
+    git config --global user.name "Camarolli9979797"
+    git add -A
+    git diff --staged --quiet || git commit -m "Updated CSV"
+    git -c http.extraheader="AUTHORIZATION: bearer ${{ secrets.MY_GITHUB_TOKEN }}" push --set-upstream origin main
+  env:
+    MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
