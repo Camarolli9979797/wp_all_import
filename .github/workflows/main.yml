@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12' # The version must be compatible with your script
+          python-version: '3.12' # Ensure this matches the version your script is compatible with
 
       - name: Install dependencies
         run: |
@@ -25,14 +25,15 @@ jobs:
       - name: Download and Transform CSV
         run: python combo.py
         env:
-          CSV_URL: ${{ secrets.CSV_URL }} # Your distributor's CSV URL should be saved as a secret
+          CSV_URL: ${{ secrets.DATABASE_URL }} # Your distributor's CSV URL should be saved as a secret
 
       - name: Commit and push if changes
-  run: |
-    git config --global user.email "mazzarolli.ai@gmail.com"
-    git config --global user.name "Camarolli9979797"
-    git add -A
-    git diff --staged --quiet || git commit -m "Updated CSV"
-    git -c http.extraheader="AUTHORIZATION: bearer ${{ secrets.MY_GITHUB_TOKEN }}" push --set-upstream origin main
-  env:
-    MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "mazzarolli.ai@gmail.com"
+          git config --global user.name "Camarolli9979797"
+          git add -A
+          git diff --staged --quiet || git commit -m "Updated CSV"
+          git push --set-upstream origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_KEY }} # PAT stored as a secret for GitHub Actions to push to the repository
+
