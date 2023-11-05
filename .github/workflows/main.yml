@@ -1,4 +1,3 @@
-
 name: CSV Transformation Workflow
 
 on:
@@ -22,6 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pandas requests
+
       - name: Download and Transform CSV
         run: python combo.py
         env:
@@ -35,4 +35,4 @@ jobs:
           git diff --staged --quiet || git commit -m "Updated CSV"
           git push
         env:
-          GITHUB_TOKEN: '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'
+          GITHUB_TOKEN: ${{ secrets.TOKEN_KEY }} # Use the secret stored in GitHub
