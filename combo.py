@@ -18,7 +18,7 @@ translations = {
     "Azzurro": "Svijetloplavo", "Grigio": "Sivo", "Verde": "Zeleno", "Viola": "Ljubičasto",
     "Arancione": "Narančasto", "Beige": "Bež", "Rosa": "Ružičasto", "Marrone": "Smeđe",
     "Multicolore": "Višebojno", "Oro": "Zlatno", "Argento": "Srebrno", "Turchese": "Tirkizno",
-    "Bronzo": "Brončano", "donna": "žena", "uomo": "muškarac", "bambina": "djevojčica", "bambino": "dječak", 
+    "Bronzo": "Brončano", "donna": "Žensko", "uomo": "Muško", "bambina": "Za djevojčice", "bambino": "Za dječake", 
   "COTONE": "Pamuk",
   "ELASTAN": "Elastan",
   "LINO": "Lan",
