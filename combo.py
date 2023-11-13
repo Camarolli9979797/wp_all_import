@@ -1,6 +1,32 @@
 import pandas as pd
 import requests
 from io import StringIO
+import re
+
+# Translation dictionary
+translations = {
+    "A spalla": "Na ramenu", "Sandals": "Sandale", "Scarves": "Šalovi", "Slippers": "Papuče",
+    "Occhiali da Sole": "Sunčane naočale", "Ties": "Kravate", "Necklaces": "Ogrlice", "Cinture": "Remeni",
+    "Body": "Tijelo", "Guanti": "Rukavice", "Zaini": "Ruksaci", "Sneakers": "Tenisice",
+    "Classica": "Klasična", "Stivaletti": "Gležnjače", "Calzini": "Čarape", "Polo": "Polo majica",
+    "Giubbotti e piumini": "Jakne", "Giacche": "Jakne", "Borse": "Torbe",
+    "Portafogli": "Novčanici", "Felpe": "Majice s kapuljačom", "Abiti": "Odjeća", "Accessori": "Dodaci",
+    "Maglie": "Dresovi", "Gonne": "Suknje", "Camicie": "Košulje", "T-Shirt": "Majice", "Mare": "More",
+    "Cappelli": "Kape", "Intimo": "Donje rublje", "Jeans": "Traperice", "Pantaloni": "Hlače",
+    "Abbigliamento": "Odjeća", "Borse": "Torbe", "Accessori": "Dodaci", "Scarpe": "Cipele",
+    "Blu": "Plavo", "Giallo": "Žuto", "Nero": "Crno", "Bianco": "Bijelo", "Rosso": "Crveno",
+    "Azzurro": "Svijetloplavo", "Grigio": "Sivo", "Verde": "Zeleno", "Viola": "Ljubičasto",
+    "Arancione": "Narančasto", "Beige": "Bež", "Rosa": "Ružičasto", "Marrone": "Smeđe",
+    "Multicolore": "Višebojno", "Oro": "Zlatno", "Argento": "Srebrno", "Turchese": "Tirkizno",
+    "Bronzo": "Brončano", "donna": "žena", "uomo": "muškarac", "bambina": "djevojčica", "bambino": "dječak"
+}
+
+def translate_substrings(df, columns):
+    for col in columns:
+        if col in df.columns:
+            for key, value in translations.items():
+                df[col] = df[col].str.replace(r'\b{}\b'.format(re.escape(key)), value, regex=True)
+    print("Substrings translated successfully!")
 
 def download_csv(url):
     headers = {
@@ -8,7 +34,7 @@ def download_csv(url):
     }
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return pd.read_csv(StringIO(response.text), delimiter='|', quotechar='"', on_bad_lines='skip')
+        return pd.read_csv(StringIO(response.text), delimiter='|', quotechar='"', on_bad_lines='skip', dtype=str)
     else:
         print("Failed to download the file. Status Code:", response.status_code)
         return None
@@ -26,19 +52,18 @@ def add_veznik_column(df):
 
 def transform_and_save_csv(df, output_file, record_type):
     try:
-        # Print the original DataFrame for debugging
         print("First few rows of the original DataFrame:")
         print(df.head())
 
-        # Fill empty cells
         fill_empty_cells(df)
 
-        # Filter the DataFrame to keep only rows where RECORD_TYPE is the specified type
         df_filtered = filter_record_type(df, record_type)
         print(f"Filtered DataFrame to keep only rows where RECORD_TYPE is '{record_type}'")
 
-        # Add VEZNIK column
         add_veznik_column(df_filtered)
+
+        # Translate specific columns
+        translate_substrings(df_filtered, ['CAT', 'SUBCAT', 'COLOR', 'MATERIAL'])
 
         # List of columns to remove
         columns_to_remove = [
@@ -51,15 +76,13 @@ def transform_and_save_csv(df, output_file, record_type):
             'Titel_CZ', 'Description_CZ',
             'Titel_SK', 'Description_SK',
             'Titel_HU', 'Description_HU',
-            'Titel_RO', 'Description_RO'
+            'Titel_RO', 'Description_RO',
+            # Add any other columns you want to remove here
         ]
         df_filtered.drop(columns=columns_to_remove, errors='ignore', inplace=True)
 
-        # Save the modified DataFrame to a new CSV file
         df_filtered.to_csv(output_file, index=False)
         print(f"Data transformation successful! Transformed file saved as '{output_file}'")
-
-        # Print the transformed DataFrame for debugging
         print("First few rows of the transformed DataFrame:")
         print(df_filtered.head())
         
@@ -78,5 +101,4 @@ record_type_to_keep = "MODEL"
 # Download the CSV file and load it into a DataFrame
 df = download_csv(url)
 if df is not None:
-    # Call the function to transform and save the CSV file
     transform_and_save_csv(df, output_file, record_type_to_keep)
