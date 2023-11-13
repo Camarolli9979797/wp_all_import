@@ -18,7 +18,74 @@ translations = {
     "Azzurro": "Svijetloplavo", "Grigio": "Sivo", "Verde": "Zeleno", "Viola": "Ljubičasto",
     "Arancione": "Narančasto", "Beige": "Bež", "Rosa": "Ružičasto", "Marrone": "Smeđe",
     "Multicolore": "Višebojno", "Oro": "Zlatno", "Argento": "Srebrno", "Turchese": "Tirkizno",
-    "Bronzo": "Brončano", "donna": "žena", "uomo": "muškarac", "bambina": "djevojčica", "bambino": "dječak"
+    "Bronzo": "Brončano", "donna": "žena", "uomo": "muškarac", "bambina": "djevojčica", "bambino": "dječak", 
+  "COTONE": "Pamuk",
+  "ELASTAN": "Elastan",
+  "LINO": "Lan",
+  "NYLON": "Najlon",
+  "POLIESTERE": "Poliester",
+  "MODAL": "Modal",
+  "LANA": "Vuna",
+  "ACRILICO": "Akril",
+  "VISCOSA": "Viskoza",
+  "ELASTOMERO": "Elastomer",
+  "SETA": "Svila",
+  "PELLE": "Koža",
+  "TESSUTO": "Tkanina",
+  "METALLO": "Metal",
+  "LYCRA": "Likra",
+  "CACHEMIRE": "Kašmir",
+  "FODERA": "Podstava",
+  "ACETATO": "Acetat",
+  "POLIAMMIDE": "Poliamid",
+  "IMBOTTITURA": "Punjenje",
+  "PIUMA": "Perje",
+  "PIUMETTA": "Paperje",
+  "CUPRO": "Cupro",
+  "POLIURETANO": "Poliuretan",
+  "SPANDEX": "Spandex",
+  "CUOIO": "Skriveno",
+  "MATERIE": "Materijali",
+  "SINTETICO": "Sintetičko",
+  "GOMMA": "Guma",
+  "MATERIALI SINTETICI": "Sintetički materijali",
+  "ALTRI": "Ostalo",
+  "VERO": "Pravi",
+  "THERMOPLASTIC": "Termoplastika",
+  "INIETTATO": "Injektirano",
+  "CORPO": "Tijelo",
+  "INFERIORE": "Donji",
+  "MANICHE": "Rukavi",
+  "RAYON": "Rajon",
+  "SUPERIORE": "Gornji",
+  "SUOLA": "Potplat",
+  "NON DISPONIBILE": "Nije dostupno",
+  "ECO": "Ekološki",
+  "MERINO": "Merino",
+  "DENIM": "Traper",
+  "SUEDE": "Antilop",
+  "PIUMINO D'ANATRA": "Duga jakna",
+  "INSERTO": "Umetak",
+  "VERGINE": "Djevičanski",
+  "PARTE": "Dio",
+  "EVA": "EVA",
+  "FIBRA": "Vlakno",
+  "METALLISED": "Metalizirano",
+  "FIBER": "Vlakna",
+  "ECOPELLE": "Ekokoža",
+  "ELASTERELLE": "Elasterell",
+  "ELASTIC FORCE": "Elastična sila",
+  "RUBBER SUEDE": "Gumeni antilop",
+  "RPET": "Rpet",
+  "ECONYL": "Econyl",
+  "PANTOGRAFATO": "Gravirano",
+  "PLASTICA": "Plastika",
+  "Poliuretano Poliestere": "Poliuretan Poliester",
+  "Cotone": "Pamuk",
+  "Poliammide": "Poliamid",
+  "Elastan": "Elastan",
+  "Tessuto": "Tkanina",
+  "Cachemire": "Kašmir"
 }
 
 def translate_substrings(df, columns):
@@ -63,7 +130,7 @@ def transform_and_save_csv(df, output_file, record_type):
         add_veznik_column(df_filtered)
 
         # Translate specific columns
-        translate_substrings(df_filtered, ['CAT', 'SUBCAT', 'COLOR', 'MATERIAL'])
+        translate_substrings(df_filtered, ['CAT', 'SUBCAT', 'COLOR', 'MATERIAL', 'SEX'])
 
         # List of columns to remove
         columns_to_remove = [
@@ -102,3 +169,4 @@ record_type_to_keep = "MODEL"
 df = download_csv(url)
 if df is not None:
     transform_and_save_csv(df, output_file, record_type_to_keep)
+
