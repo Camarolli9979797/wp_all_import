@@ -85,7 +85,12 @@ translations = {
   "Poliammide": "Poliamid",
   "Elastan": "Elastan",
   "Tessuto": "Tkanina",
-  "Cachemire": "Kašmir"
+  "Cachemire": "Kašmir",
+  "Sandali": "Sandale",
+    "Sciarpe": "Šalovi",
+    "Ciabatte": "Natikače",
+    "Cravatte": "Kravate",
+    "Gilet": "Prsluk"
 }
 
 def translate_substrings(df, columns):
