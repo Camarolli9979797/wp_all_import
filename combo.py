@@ -88,7 +88,7 @@ translations = {
   "Cachemire": "Kašmir",
   "Sandali": "Sandale",
     "Sciarpe": "Šalovi",
-    "Ciabatte": "Natikače",
+    "Ciabatte": "Papuče/Japanke",
     "Cravatte": "Kravate",
     "Gilet": "Prsluk"
 }
