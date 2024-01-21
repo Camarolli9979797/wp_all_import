@@ -10,7 +10,7 @@ translations = {
     "Body": "Tijelo", "Guanti": "Rukavice", "Zaini": "Ruksaci", "Sneakers": "Tenisice",
     "Classica": "Klasična", "Stivaletti": "Gležnjače", "Calzini": "Čarape", "Polo": "Polo majica",
     "Giubbotti e piumini": "Jakne", "Giacche": "Jakne", "Borse": "Torbe",
-    "Portafogli": "Novčanici", "Felpe": "Majice s kapuljačom", "Abiti": "Odjeća", "Accessori": "Dodaci",
+    "Portafogli": "Novčanici", "Felpe": "Veste i majice s kapuljačom", "Abiti": "Odjeća", "Accessori": "Dodaci",
     "Maglie": "Dresovi", "Gonne": "Suknje", "Camicie": "Košulje", "T-Shirt": "Majice", "Mare": "More",
     "Cappelli": "Kape", "Intimo": "Donje rublje", "Jeans": "Traperice", "Pantaloni": "Hlače",
     "Abbigliamento": "Odjeća", "Borse": "Torbe", "Accessori": "Dodaci", "Scarpe": "Cipele",
