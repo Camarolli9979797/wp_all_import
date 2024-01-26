@@ -119,8 +119,9 @@ def filter_record_type(df, record_type):
     return df[df['RECORD_TYPE'] == record_type].copy()
 
 def add_veznik_column(df):
-    df['VEZNIK'] = df['SKU'].apply(lambda x: str(x).split('_')[0].split('-')[0])
+    df['VEZNIK'] = df['SKU'].apply(lambda x: x.split('_')[0] if "_" in x else x)
     print("VEZNIK column added successfully!")
+
 
 def transform_and_save_csv(df, output_file, record_type):
     try:
