@@ -90,7 +90,9 @@ translations = {
   "Sciarpe": "Šalovi",
   "Ciabatte": "Papuče/Japanke",   
   "Cravatte": "Kravate",
-  "Gilet": "Prsluk"}
+  "Gilet": "Prsluk"
+  
+}
 
 def translate_substrings(df, columns):
     for col in columns:
@@ -111,13 +113,7 @@ def download_csv(url):
         return None
 
 def fill_empty_cells(df):
-    # List of columns to exclude from filling empty cells
-    exclude_columns = ["PICTURE_3"]
-    
-    # Fill empty cells in all columns except those in exclude_columns
-    columns_to_fill = [col for col in df.columns if col not in exclude_columns]
-    df[columns_to_fill] = df[columns_to_fill].ffill()
-    
+    df.ffill(inplace=True)
     print("Empty cells filled successfully!")
 
 def filter_record_type(df, record_type):
@@ -126,6 +122,7 @@ def filter_record_type(df, record_type):
 def add_veznik_column(df):
     df['VEZNIK'] = df['SKU'].apply(lambda x: x.split('_')[0] if "_" in x else x)
     print("VEZNIK column added successfully!")
+
 
 def transform_and_save_csv(df, output_file, record_type):
     try:
