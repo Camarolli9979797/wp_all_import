@@ -4,7 +4,13 @@ from io import StringIO
 
 # List of brand names to filter
 brands_to_filter = [
-    #... (your list of brands)
+   "CALVIN KLEIN", "TOMMY HILFIGER", "U.S. POLO", "U.S. POLO BEST PRICE",
+    "U.S. POLO ASSN.", "U.S. GRAND POLO", "NORTH SAILS", "GANT",
+    "NORWAY 1963", "NAPAPIJRI", "NAPAPIJRI SHOES", "HARMONT & BLAINE",
+    "LEVI'S", "SERGIO TACCHINI", "HARMONT & BLAINE", "GAS", "GIUESS JEANS",
+    "KARL LAGERFELD BEACHWEAR", "LA MARTINA", "LEVI'S", "DESIGUAL", "MARES",
+    "PIQUADRO", "PLEIN SPORT", "RALPH LAUREN", "TIMBERLAND", "VALENTINO BAGS",
+    "VANS", "GUESS JEANS"
 ]
 
 # URL of the CSV to manipulate
