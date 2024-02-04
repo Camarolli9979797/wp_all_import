@@ -1,3 +1,5 @@
+
+
 name: CSV Transformation Workflow
 
 on:
@@ -16,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9' # Use a Python version that is available in GitHub Actions runners.
+          python-version: '3.9'
 
       - name: Cache pip
         uses: actions/cache@v2
@@ -30,17 +32,22 @@ jobs:
         run: |
           pip install pandas requests
 
-      - name: Download and Transform CSV
+      - name: Download and Transform CSV with combo.py
         run: python combo.py
         env:
           CSV_URL: 'https://feed.stockfirmati.com/csv/exportdropclang.csv'
+
+      - name: Transform CSV with brand.py
+        run: python brand.py
+        env:
+          CSV_URL: 'https://raw.githubusercontent.com/Camarolli9979797/wp_all_import/main/final_transformed_file.csv'
 
       - name: Commit and push if changes
         run: |
           git config --global user.email "mazzarolli.ai@gmail.com"
           git config --global user.name "Camarolli9979797"
           git add -A
-          git diff --staged --quiet || git commit -m "Updated CSV following transformation"
+          git diff --staged --quiet || git commit -m "Updated CSV following transformation with combo.py and brand.py"
           git push
         env:
           GITHUB_TOKEN: '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'
