@@ -31,7 +31,7 @@ jobs:
           pip install pandas requests
 
       - name: Download and Transform CSV
-        run: python combo.py
+        run: python wp_all_import/brand.py  # Updated path to reflect the location of brand.py
         env:
           CSV_URL: 'https://feed.stockfirmati.com/csv/exportdropclang.csv'
 
