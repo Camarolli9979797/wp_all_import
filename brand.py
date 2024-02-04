@@ -33,10 +33,13 @@ def filter_and_save_csv(url, brands, output_path):
         # Filter the DataFrame for the selected brands
         df_filtered = df[df['BRAND'].isin(brands)]
 
-        # Select the required columns
-        columns_required = ['SKU', 'QUANTITY', 'PICTURE_1', 'VEZNIK', 'BARCODE', 'ORDERCODE', 'BRAND', 'SEX']
-        df_filtered = df_filtered[columns_required]
-
+        # Select the required columns, ensuring they exist in the DataFrame
+        columns_required = ['SKU', 'QUANTITY', 'PICTURE_1', 'VEZNIK', 'BARCODE', 'BRAND', 'SEX']
+        existing_columns = [col for col in columns_required if col in df_filtered.columns]
+        if 'ORDERCODE' in df_filtered.columns:
+            existing_columns.append('ORDERCODE')
+        df_filtered = df_filtered[existing_columns]
+        
         # Additional filtering: Remove rows containing specific strings
         strings_to_remove = ['Za djevojčice', 'Za dječake']
         df_filtered = df_filtered[~df_filtered.apply(lambda row: row.astype(str).str.contains('|'.join(strings_to_remove)).any(), axis=1)]
