@@ -2,8 +2,8 @@ name: CSV Transformation Workflow
 
 on:
   schedule:
-    # Runs every 10 minutes
-    - cron: '*/10 * * * *'
+    # Runs every 5 minutes
+    - cron: '*/5 * * * *'
 
 jobs:
   transform-and-commit:
@@ -30,13 +30,8 @@ jobs:
         run: |
           pip install pandas requests
 
-      - name: Download and Transform CSV with combo.py
+      - name: Download and Transform CSV
         run: python combo.py
-        env:
-          CSV_URL: 'https://feed.stockfirmati.com/csv/exportdropclang.csv'
-
-      - name: Download and Transform CSV with brand.py
-        run: python brand.py
         env:
           CSV_URL: 'https://feed.stockfirmati.com/csv/exportdropclang.csv'
 
