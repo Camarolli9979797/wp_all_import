@@ -37,7 +37,7 @@ def filter_and_save_csv(url, brands, output_path):
         columns_required = ['QUANTITY', 'ï»¿ORDERCODE']
         existing_columns = [col for col in columns_required if col in df_filtered.columns]
         if 'ORDERCODE' in df_filtered.columns:
-            existing_columns.append('ORDERCODE')
+            existing_columns.append('ORDERCODE', 'SKU')
         df_filtered = df_filtered[existing_columns]
         
         # Additional filtering: Remove rows containing specific strings
