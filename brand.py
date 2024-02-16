@@ -37,7 +37,7 @@ def filter_and_save_csv(url, brands, output_path, last_run_path):
         df_filtered = df[df['BRAND'].isin(brands)]
 
         # Ensure required columns exist
-        columns_required = ['QUANTITY', 'SKU', "ORDERCODE"]
+        columns_required = ['QUANTITY', 'SKU', "ï»¿ORDERCODE"]
         existing_columns = [col for col in columns_required if col in df_filtered.columns]
         if 'ORDERCODE' in df_filtered.columns:  # Adjusting for potential column name discrepancy
             existing_columns.append('ORDERCODE')
