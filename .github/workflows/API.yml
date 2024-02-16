@@ -24,6 +24,6 @@ jobs:
           pip install flask pandas requests
 
       - name: Run API server
-        run: python api.py
+        run: python Api.py
     env:
       GITHUB_TOKEN: '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'
