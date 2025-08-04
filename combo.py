@@ -140,20 +140,7 @@ def transform_and_save_csv(df, output_file, record_type):
         translate_substrings(df_filtered, ['CAT', 'SUBCAT', 'COLOR', 'MATERIAL', 'SEX'])
 
         # List of columns to remove
-        columns_to_remove = [
-            'Titel_ITA', 'Description_ITA',
-            'Titel_ES', 'Description_ES',
-            'Titel_FR', 'Description_FR',
-            'Titel_DE', 'Description_DE',
-            'Titel_BG', 'Description_BG',
-            'Titel_PL', 'Description_PL',
-            'Titel_CZ', 'Description_CZ',
-            'Titel_SK', 'Description_SK',
-            'Titel_HU', 'Description_HU',
-            'Titel_RO', 'Description_RO',
-            # Add any other columns you want to remove here
-        ]
-        df_filtered.drop(columns=columns_to_remove, errors='ignore', inplace=True)
+
 
         df_filtered.to_csv(output_file, index=False)
         print(f"Data transformation successful! Transformed file saved as '{output_file}'")
